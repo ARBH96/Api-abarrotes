@@ -1,0 +1,35 @@
+CREATE TABLE Producto (
+    Nombre VARCHAR(255) PRIMARY KEY,
+    Descripcion TEXT,
+    Precio DECIMAL(10, 2),
+    SKU VARCHAR(50)
+);
+
+
+CREATE TABLE Cliente (
+    ClienteID INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(100),
+    Apellidos VARCHAR(100),
+    Email VARCHAR(255),
+    Telefono VARCHAR(20),
+    Direccion VARCHAR(255),
+    CodigoPostal VARCHAR(10),
+    BarrioColonia VARCHAR(100),
+    Ciudad VARCHAR(100)
+);
+
+CREATE TABLE Venta (
+    VentaID INT PRIMARY KEY AUTO_INCREMENT,
+    FechaVenta DATE,
+    ClienteID INT,
+    FOREIGN KEY (ClienteID) REFERENCES Cliente(ClienteID)
+);
+
+CREATE TABLE Venta_Producto (
+    VentaID INT,
+    NombreProducto VARCHAR(255),
+    Cantidad INT,
+    PRIMARY KEY (VentaID, NombreProducto),
+    FOREIGN KEY (VentaID) REFERENCES Venta(VentaID),
+    FOREIGN KEY (NombreProducto) REFERENCES Producto(Nombre)
+);
